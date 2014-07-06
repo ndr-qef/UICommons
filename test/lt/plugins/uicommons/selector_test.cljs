@@ -28,3 +28,16 @@
               :options selector
               :exec (fn [])})
 
+
+;;;; test exec-selector
+
+(def exec-selector (sel/exec-selector {:key :key
+                                       :placeholder "exec-selector"
+                                       :items (fn [] items)
+                                       :transform selector-transform}))
+
+(cmd/command {:command ::test-exec-selector
+              :desc "UICommons: test exec-selector"
+              :options exec-selector
+              :exec (fn [item]
+                      (println "Exec selector: " item))})
