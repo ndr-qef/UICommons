@@ -64,3 +64,14 @@
 (defn extended-selector [opts extension-tag]
   (selector (assoc-in opts [:tags] #{:filter-list extension-tag})))
 
+
+;;;; command-friendly executor
+
+(defn exec-selector [opts]
+  (extended-selector opts :uicommons.selector.exec))
+
+(behavior ::exec-selected!
+          :triggers #{:select}
+          :reaction (fn [this item]
+                      (scmd/exec-active! item)))
+
