@@ -58,3 +58,9 @@
       (object/refresh!)  ; reload tags/behaviors in case `opts` merges any
       (object/raise refresh!))))
 
+
+;;;; extended selectors
+
+(defn extended-selector [opts extension-tag]
+  (selector (assoc-in opts [:tags] #{:filter-list extension-tag})))
+
