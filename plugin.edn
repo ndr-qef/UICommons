@@ -1,0 +1,5 @@
+{:name "UICommons"
+ :author "ndr-qef"
+ :source "https://github.com/ndr-qef/UICommons"
+ :desc "Reusable, extensible UI components."
+ :behaviors "uicommons.behaviors"}
