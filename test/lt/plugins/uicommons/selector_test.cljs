@@ -15,3 +15,16 @@
 (defn selector-transform [original scored highlighted item]
   (str "<h3>" highlighted "</h2><p>" (:a item) "</p>"))
 
+
+;;;; test selector
+
+(def selector (sel/selector {:key :key
+                             :placeholder "selector"
+                             :items (fn [] items)
+                             :transform selector-transform}))
+
+(cmd/command {:command ::test-selector
+              :desc "UICommons: test selector"
+              :options selector
+              :exec (fn [])})
+
