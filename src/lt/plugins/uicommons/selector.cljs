@@ -61,14 +61,14 @@
 
 ;;;; extended selectors
 
-(defn extended-selector [opts extension-tag]
-  (selector (assoc-in opts [:tags] #{:filter-list extension-tag})))
+(defn extended-selector [opts ext-tags]
+  (selector (assoc-in opts [:tags] (apply conj #{:filter-list} ext-tags))))
 
 
 ;;;; command-friendly executor
 
 (defn exec-selector [opts]
-  (extended-selector opts :uicommons.selector.exec))
+  (extended-selector opts [:uicommons.selector.exec]))
 
 (behavior ::exec-selected!
           :triggers #{:select}
