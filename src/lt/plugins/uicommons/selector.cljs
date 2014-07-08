@@ -5,6 +5,12 @@
   (:require-macros [lt.macros :refer [defui behavior]]))
 
 
+(defn deep-merge
+  [& vals]
+  (if (every? map? vals)
+    (apply merge-with deep-merge vals)
+    (last vals)))
+
 ;;;; base selector
 
 ;;; defaults
@@ -48,7 +54,7 @@
                 :placeholder "search"
                 :search ""
                 :init (fn [this opts]
-                        (init-flist this (merge defaults opts))))
+                        (init-flist this (deep-merge defaults opts))))
 
 
 (defn selector [opts]
