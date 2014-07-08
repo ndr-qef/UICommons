@@ -143,7 +143,7 @@
 (behavior ::search-by
           :triggers #{:search-by}
           :reaction (fn [this search-mode]
-                      (object/merge! sel new-mode)
+                      (object/merge! this search-mode)
                       (emphasize-mode this search-mode)))
 
 
