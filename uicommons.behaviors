@@ -1,3 +1,5 @@
 {:+ {:app [(:lt.objs.plugins/load-js "uicommons_compiled.js" true)]
 
-     :uicommons.selector.exec [:lt.plugins.uicommons.selector/exec-selected!]}}
+     :uicommons.selector.exec [:lt.plugins.uicommons.selector/exec-selected!]
+
+     :uicommons.selector.multimode [:lt.plugins.uicommons.selector/search-by]}}

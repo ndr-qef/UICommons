@@ -81,3 +81,81 @@
           :reaction (fn [this item]
                       (scmd/exec-active! item)))
 
+
+;;;; multimode selector
+
+(defn order-comparison [x y]
+  (let [x-priority (:order x)
+        y-priority (:order y)
+        comparison (compare x-priority y-priority)]
+    (if-not (zero? comparison)
+      comparison
+      (compare x y))))
+
+
+;;; defaults
+
+(def css-mode-prefix "uicommons_selector-search-by-")
+
+(defn ->class-str [& strings]
+  (->> (into [] strings) (filter identity) (interpose " ") (apply str)))
+
+(defui mode-button [this mode]
+  (let [default? (:default mode)
+        button-text (:button-text mode)
+        css-sel  (::id mode)]
+    [:div {:id css-sel
+           :class (->class-str "button"
+                               "mode-selector"
+                               (if default? "active-mode"))}
+     button-text])
+  :click (fn [] (object/raise this :search-by mode)))
+
+(defn multimode-template [this {:keys [modes templates ::list-node]}]
+  (let [{:keys [input mode-button]} templates]
+   [:div.filter-list.uicommons_selector.empty
+    (input this)
+    [:div.mode-selection (map #(mode-button this %) modes)]
+    [:ul list-node]]))
+
+
+(def multimode-defaults {:templates {:selector multimode-template
+                                     :mode-button mode-button}})
+
+
+;;; methods for changing mode
+
+(defn complementary-modes [selector new-mode]
+  (let [modes (:modes @selector)]
+    (remove #(= new-mode %) modes)))
+
+(defn ->str-id [val-id] (str "#" val-id))
+
+(defn emphasize-mode [msel mode]
+  (let [active-id (->str-id (::id mode))
+        inactive-ids (map #(->str-id (::id %))
+                           (complementary-modes msel mode))]
+    (dom/add-class (dom/$ active-id) :active-mode)
+    (doseq [id inactive-ids]
+      (dom/remove-class (dom/$ id) :active-mode))))
+
+
+(behavior ::search-by
+          :triggers #{:search-by}
+          :reaction (fn [this search-mode]
+                      (object/merge! sel new-mode)
+                      (emphasize-mode this search-mode)))
+
+
+;;; constructor
+
+(defn add-id [modes]
+  (for [n (range (count modes))]
+    (merge (nth modes n) {::id (str css-mode-prefix n)})))
+
+
+(defn multimode-selector [opts]
+  (let [opts (deep-merge multimode-defaults
+                         (update-in opts [:modes] add-id))]
+    (extended-selector opts [:uicommons.selector.multimode])))
+
