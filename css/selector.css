@@ -1,0 +1,41 @@
+.filter-list.uicommons_selector {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+#right-bar .filter-list.uicommons_selector > input {
+  height: auto;
+}
+
+.uicommons_selector .mode-selection {
+  display: flex;
+  height: auto;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.uicommons_selector .mode-selection > .button {
+  flex: 1;
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: var(inactive-bg);
+}
+
+#right-bar .filter-list.uicommons_selector > ul {
+  position: static;
+  height: calc(100% - 11rem); /* brittle */
+  overflow: auto;
+}
+
+.uicommons_selector .mode-selection > .button:first-child {
+  margin-left: 0;
+}
+
+.uicommons_selector .mode-selection > .button:last-child {
+  margin-right: 0;
+}
+
+.uicommons_selector .mode-selection > .button.active-mode {
+  background-color: var(highlight-bg);
+}
