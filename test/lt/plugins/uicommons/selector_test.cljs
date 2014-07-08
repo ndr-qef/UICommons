@@ -3,24 +3,30 @@
             [lt.objs.command :as cmd]))
 
 
-;;;; common test paramters
+;;;; common test parameters
 
-(def items [{:key "0"
-             :a "alpha"
-             :b "beta"}
-            {:key "1"
-             :a "aleph"
-             :b "bet"}])
+(def greek-alphabet ["alpha" "beta" "gamma" "delta" "epsilon" "zeta" "eta"
+                     "theta" "iota" "kappa" "lambda" "mu" "nu" "xi" "omicron"
+                     "pi" "rho" "sigma" "tau" "upsilon" "phi" "chi" "psi"
+                     "omega"])
+(def hebrew-abjad ["aleph" "bet" "gimel" "daled" "he" "vav" "zayin" "heth"
+                   "teth" "yud" "kaph" "lamed" "mem" "nun" "samech" "aying"
+                   "pe" "tsade" "qoph" "reish" "shin" "taw"])
+(defn items [n]
+  (vec (for [i (range n)]
+         {:key (str i)
+          :greek (nth (cycle greek-alphabet) i)
+          :hebrew (nth (cycle hebrew-abjad) i)})))
 
 (defn selector-transform [original scored highlighted item]
-  (str "<h3>" highlighted "</h2><p>" (:a item) "</p>"))
+  (str "<h3>" highlighted "</h2><p>" (:greek item) "</p>"))
 
 
 ;;;; test selector
 
 (def selector (sel/selector {:key :key
                              :placeholder "selector"
-                             :items (fn [] items)
+                             :items (fn [] (items 30))
                              :transform selector-transform}))
 
 (cmd/command {:command ::test-selector
@@ -33,7 +39,7 @@
 
 (def exec-selector (sel/exec-selector {:key :key
                                        :placeholder "exec-selector"
-                                       :items (fn [] items)
+                                       :items (fn [] (items 30))
                                        :transform selector-transform}))
 
 (cmd/command {:command ::test-exec-selector
@@ -46,17 +52,17 @@
 ;;;; test multimode-selector
 
 (def test-modes [{:key :key
-                  :button-text "Key"
+                  :button-text "key"
                   :default true}
-                 {:key :a
-                  :button-text "a"}
-                 {:key :b
-                  :button-text "b"}])
+                 {:key :greek
+                  :button-text "greek"}
+                 {:key :hebrew
+                  :button-text "hebrew"}])
 
 (def multimode-selector (sel/multimode-selector {:key :key
                                                  :modes test-modes
                                                  :placeholder "multimode-selector"
-                                                 :items (fn [] items)
+                                                 :items (fn [] (items 30))
                                                  :transform selector-transform}))
 
 (cmd/command {:command ::test-multimode-selector
