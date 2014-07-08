@@ -20,8 +20,8 @@
     (itemize this x)))
 
 (defn default-template [this {:keys [size templates ::list-node]}]
-  (let [{:keys [input item]} templates]
-    [:div.filter-list.empty
+  (let [input (:input templates)]
+    [:div.filter-list.uicommons_selector.empty
      (input this)
      [:ul list-node]]))
 
