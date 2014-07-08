@@ -15,6 +15,10 @@
   (object/raise this :set-selection! item)
   (object/raise this :select! item))
 
+(defn ->list-node [this itemize size]
+  (for [x (range size)]
+    (itemize this x)))
+
 (defn default-template [this {:keys [size templates ::list-node]}]
   (let [{:keys [input item]} templates]
     [:div.filter-list.empty
@@ -29,10 +33,6 @@
 
 
 ;;; constructor
-
-(defn ->list-node [this itemize size]
-  (for [x (range size)]
-    (itemize this x)))
 
 (defn init-flist [this {:keys [size templates] :as opts}]
   (let [template (:selector templates)
