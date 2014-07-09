@@ -19,7 +19,7 @@
           :hebrew (nth (cycle hebrew-abjad) i)})))
 
 (defn selector-transform [original scored highlighted item]
-  (str "<h3>" highlighted "</h2><p>" (:greek item) "</p>"))
+  (str "<h3>" highlighted "</h3><p>" (:greek item) "</p>"))
 
 
 ;;;; test selector
@@ -68,4 +68,4 @@
 (cmd/command {:command ::test-multimode-selector
               :desc "UICommons: test multimode-selector"
               :options multimode-selector
-              :exec (fn [item] )})
+              :exec (fn [item])})
