@@ -1,15 +1,9 @@
 (ns lt.plugins.uicommons.selector
   (:require [lt.object :as object]
             [lt.objs.sidebar.command :as scmd]
-            [lt.util.dom :as dom])
+            [lt.util.dom :as dom]
+            [lt.plugins.uicommons.utilia :refer [deep-merge]])
   (:require-macros [lt.macros :refer [defui behavior]]))
-
-
-(defn deep-merge
-  [& vals]
-  (if (every? map? vals)
-    (apply merge-with deep-merge vals)
-    (last vals)))
 
 ;;;; base selector
 
