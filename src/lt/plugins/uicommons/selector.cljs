@@ -97,8 +97,8 @@
 (defui mode-button [this mode]
   (let [default? (:default mode)
         button-text (:button-text mode)
-        css-sel  (::id mode)]
-    [:div {:id css-sel
+        id  (::id mode)]
+    [:div {:id id
            :class (->class-str "button"
                                "mode-selector"
                                (if default? "active-mode"))}
