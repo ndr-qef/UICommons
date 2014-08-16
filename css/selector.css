@@ -3,8 +3,10 @@
   flex-flow: column nowrap;
 }
 
-#right-bar .filter-list.uicommons_selector > input {
-  height: auto;
+.filter-list.uicommons_selector > input {
+  flex: 0 0 auto;
+  margin: 0.5rem 0 0.75rem 0;
+  font-size: 0.75rem;
 }
 
 .filter-list.uicommons_selector .mode-selection {
