@@ -73,6 +73,7 @@
 (behavior ::exec-selected!
           :triggers #{:select}
           :reaction (fn [this item]
+                      ;; FIXME: decouple from sidebar
                       (scmd/exec-active! item)))
 
 
