@@ -2,7 +2,7 @@
   (:require [lt.object :as object]
             [lt.objs.sidebar.command :as scmd]
             [lt.util.dom :as dom]
-            [lt.plugins.uicommons.utilia :refer [deep-merge]])
+            [lt.plugins.uicommons.utilia :as utl :refer [deep-merge]])
   (:require-macros [lt.macros :refer [defui behavior]]))
 
 ;;;; base selector
@@ -91,17 +91,14 @@
 
 (def css-mode-prefix "uicommons_selector-search-by-")
 
-(defn ->class-str [& strings]
-  (->> (into [] strings) (filter identity) (interpose " ") (apply str)))
-
 (defui mode-button [this mode]
   (let [default? (:default mode)
         button-text (:button-text mode)
         id  (::id mode)]
     [:div {:id id
-           :class (->class-str "button"
-                               "mode-selector"
-                               (if default? "active-mode"))}
+           :class (utl/->class-str "button"
+                                   "mode-selector"
+                                   (if default? "active-mode"))}
      button-text])
   :click (fn [] (object/raise this :search-by mode)))
 

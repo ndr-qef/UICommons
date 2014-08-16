@@ -27,3 +27,6 @@
 
 (defn cssel [& xs]
   (keyword (reduce str (map name xs))))
+
+(defn ->class-str [& strings]
+  (->> (into [] strings) (filter identity) (interpose " ") (apply str)))
