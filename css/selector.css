@@ -24,7 +24,7 @@
 
 .filter-list.uicommons_selector > ul {
   position: static;
-  max-height: 100%; /* Problematic */
+  max-height: 100%; /* FIXME: problematic, until flex layout lands in core */
   overflow: auto;
 }
 
