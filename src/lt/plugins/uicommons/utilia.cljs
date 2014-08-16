@@ -3,9 +3,13 @@
             [lt.util.dom :as dom]))
 
 (defn deep-merge [& xs]
-  (if (every? map? xs)
-    (apply merge-with deep-merge xs)
-    (last xs)))
+  (let [ms (map #(or % {}) xs)]
+    (apply
+     (fn f [& ys]
+       (if (every? map? ys)
+         (apply merge-with f ys)
+         (last ys)))
+     ms)))
 
 (defn deep-merge! [obj & xs]
   (swap! obj deep-merge xs))
