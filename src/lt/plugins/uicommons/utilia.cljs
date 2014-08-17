@@ -1,6 +1,7 @@
 (ns lt.plugins.uicommons.utilia
   (:require [lt.object :as object]
-            [lt.util.dom :as dom]))
+            [lt.util.dom :as dom]
+            [crate.core :as crate]))
 
 (defn deep-merge [& xs]
   (let [ms (map #(or % {}) xs)]
@@ -23,6 +24,16 @@
   (if (atom? x)
     (object/->content x)
     x))
+
+(defn merge-content [obj content]
+  (object/merge! obj {:content (if (vector? content)
+                                 (crate/html content)
+                                 content)}))
+
+(defn re-template [obj template & [opts]]
+  (let [new-content (crate/html template obj)]
+    (merge-content obj new-content)))
+
 
 (defn append-obj [parent child]
   (dom/append (->content parent) (->content child)))
