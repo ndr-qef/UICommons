@@ -14,8 +14,10 @@
 (defn deep-merge! [obj & xs]
   (swap! obj deep-merge xs))
 
+
 (defn ^boolean atom? [x]
   (satisfies? IDeref x))
+
 
 (defn ->content [x]
   (if (atom? x)
