@@ -1,0 +1,37 @@
+.uicommons.palette {
+  display: none;
+
+  padding: 0.5rem 1rem;
+
+  font-size: 1rem;
+}
+
+.uicommons.palette.visible {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.uicommons.palette.auto {
+  width: auto;
+  height: auto;
+}
+
+.uicommons.palette.normal {
+  width: 400px;
+  height: 300px;
+}
+
+.uicommons.palette.small {
+  width: 128px;
+  height: 128px;
+}
+
+.uicommons.palette.collapsed {
+  width: 10ch;
+  max-height: 1.5em;
+
+  padding: 0;
+}
+
+
+
