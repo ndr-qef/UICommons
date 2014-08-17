@@ -1,0 +1,28 @@
+.uicommons.overlay {
+  position: absolute;
+  z-index: 999;
+
+  background: var(bg);
+}
+
+.uicommons.overlay.h-centered {
+  left: 50%;
+}
+
+.uicommons.overlay.top {
+  top: 0;
+
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.uicommons.overlay.bottom {
+  bottom: 0;
+
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.uicommons.overlay.right {
+  right: 8%;
+}
